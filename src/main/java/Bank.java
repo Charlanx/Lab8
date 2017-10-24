@@ -1,3 +1,5 @@
+//import BankAccount.BankAccountType;
+
 /**
  * Implement a bank class.
  * <p>
@@ -8,10 +10,22 @@
  * @see <a href="https://cs125.cs.illinois.edu/lab/8/">Lab 8 Description</a>
  */
 public class Bank {
-
-    public String bankName;
-
+    /**
+     * bankName.
+     */
+    private String bankName;
+    /**
+     * returns object.
+     */
+    /**
+     * total accounts.
+     */
+    private static int totalAccounts = 0;
+    /**
+     * Bank.
+     */
     public Bank() {
+
         bankName = "Illini Bank";
     }
 
@@ -29,6 +43,12 @@ public class Bank {
         /*
          * Implement this function
          */
+        if (bankAccount.getAccountBalance() >= amount) {
+            bankAccount.setAccountBalance(bankAccount.getAccountBalance() - amount);
+            System.out.println("Balance: " + bankAccount.getAccountBalance());
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -45,6 +65,12 @@ public class Bank {
         /*
          * Implement this function
          */
+        if(bankAccount != null) {
+        bankAccount.setAccountBalance(amount + bankAccount.getAccountBalance());
+        System.out.println("Balance: " + bankAccount.getAccountBalance());
+        return true;
+        }
+        return false;
     }
 
     /**
@@ -64,6 +90,13 @@ public class Bank {
         /*
          * Implement this function
          */
+        if (source.getAccountBalance() >= amount) {
+            source.setAccountBalance(source.getAccountBalance() - amount);
+            destination.setAccountBalance(destination.getAccountBalance() + amount);
+            System.out.println("Balance: " + source.getAccountBalance());
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -77,11 +110,13 @@ public class Bank {
         /*
          * Implement this function
          */
+
+        bankAccount.setName(name);
     }
 
-    public static int totalAccounts = 0;
+
     /**
-     * Uses static variable to get number of bank accounts opened.
+     * Uses static variable to get number of bank accounts opened....
      *
      * @return the total number of accounts
      */
@@ -89,6 +124,7 @@ public class Bank {
         /*
          * Implement this function
          */
+        return totalAccounts;
     }
 
     /**
@@ -103,14 +139,17 @@ public class Bank {
         System.out.println("We are excited to have you banking with us!\n\n");
 
         // Create Bank Accounts
-        BankAccount account1 = new BankAccount("John Doe", BankAccountType.CHECKINGS);
+        BankAccount account1 = new BankAccount("John Doe", BankAccount.BankAccountType.CHECKINGS);
+        totalAccounts += 1;
         System.out.println("Bank account for John Doe created");
 
-        BankAccount account2 = new BankAccount("Jony Ive", BankAccountType.STUDENT);
+        BankAccount account2 = new BankAccount("Jony Ive", BankAccount.BankAccountType.STUDENT);
+        totalAccounts += 1;
         System.out.println("Bank account for Johy Ive created\n\n");
 
         // Deposit money to both accounts and print new balance
         bank.depositMoney(account1, 1000.0);
+
         bank.depositMoney(account2, 5000.0);
 
         // Withdraw money from Account 2 and print new balance
@@ -124,3 +163,6 @@ public class Bank {
         System.out.println(Bank.totalAccounts);
     }
 }
+
+
+
